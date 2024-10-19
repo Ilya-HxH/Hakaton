@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { TicketsContext } from '../context/TicketsContext';
-import TicketCard from '../components/TicketCard';
+import TicketTable from '../components/TicketTable';
 
 const UserPage = () => {
   const { tickets, closeNotification } = useContext(TicketsContext);
@@ -11,7 +11,7 @@ const UserPage = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {tickets.map(ticket => 
           ticket.visible ? (
-            <TicketCard key={ticket.id} ticket={ticket} />
+            <TicketTable key={ticket.id} ticket={ticket} />
           ) : (
             <div key={ticket.id} className="border border-red-300 bg-red-100 p-4 rounded-lg">
               <p className="text-red-700">Your ticket "{ticket.title}" was rejected: {ticket.deleteReason}</p>

@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
-import { TicketsContext } from '../context/TicketsContext';
+import { useTicketsStore } from '../store/ticketsStore';
 
 const TicketDetail = () => {
   const { id } = useParams(); // Получаем ID из URL
-  const { tickets } = useContext(TicketsContext);
+  const tickets = useTicketsStore((state) => state.tickets); // Получаем состояние заявок
 
   // Найдем заявку по ID
   const ticket = tickets.find(ticket => ticket.id === parseInt(id));
@@ -13,7 +13,7 @@ const TicketDetail = () => {
     return <p>Ticket not found</p>;
   }
 
-
+  // Если заявка отклонена, показать уведомление
   if (!ticket.visible) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-gray-100">
